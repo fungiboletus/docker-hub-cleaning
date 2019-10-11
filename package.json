@@ -1,0 +1,16 @@
+{
+  "name": "docker-hub-cleaning",
+  "version": "1.0.0",
+  "description": "Remove old tags from docker hub",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "docker-hub-api": "^0.8.0",
+    "inquirer": "^7.0.0",
+    "semver": "^6.3.0"
+  }
+}
