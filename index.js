@@ -1,6 +1,8 @@
 const docker = require('docker-hub-api');
-const semver = require('semver');
 const inquirer = require('inquirer');
+const pLimit = require('p-limit');
+const semver = require('semver');
+const cliProgress = require('cli-progress');
 
 docker.setCacheOptions({ enabled: false });
 
@@ -93,7 +95,14 @@ docker.setCacheOptions({ enabled: false });
     }
 
     console.log("Deleting tags");
-    await Promise.all(tagsConfirmedToRemove.map((tag) => docker.deleteTag(imageUsername, imageName, tag)));
+    const progressBar = new cliProgress.SingleBar();
+    progressBar.start(tagsConfirmedToRemove.length, 0);
+    const limit = pLimit(4);
+    await Promise.all(tagsConfirmedToRemove.map((tag) => limit(async () => {
+      await docker.deleteTag(imageUsername, imageName, tag);
+      progressBar.increment();
+    })));
+    progressBar.stop();
     console.log("All tags deleted.");
   }
 })();

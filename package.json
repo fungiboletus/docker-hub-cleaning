@@ -10,8 +10,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cli-progress": "^3.8.0",
     "docker-hub-api": "^0.8.0",
-    "inquirer": "^7.0.0",
-    "semver": "^6.3.0"
+    "inquirer": "^7.1.0",
+    "p-limit": "^2.3.0",
+    "semver": "^7.3.2"
   }
 }
